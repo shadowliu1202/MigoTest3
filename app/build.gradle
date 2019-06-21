@@ -27,3 +27,44 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+//RxJava
+dependencies {
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
+}
+
+
+dependencies {
+    //AutoValue
+    implementation "com.google.auto.value:auto-value-annotations:1.6.5"
+    annotationProcessor "com.google.auto.value:auto-value:1.6.5"
+    implementation 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.6'
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
+
+}
+
+dependencies {
+    def room_version = "1.1.1"
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+    // optional - RxJava support for Room
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "android.arch.persistence.room:guava:$room_version"
+    // Test helpers
+    testImplementation "android.arch.persistence.room:testing:$room_version"
+}
+
+dependencies {
+    def paging_version = "1.0.1"
+
+    implementation "android.arch.paging:runtime:$paging_version"
+
+    // alternatively - without Android dependencies for testing
+    testImplementation "android.arch.paging:common:$paging_version"
+
+    // optional - RxJava support, currently in release candidate
+    implementation "android.arch.paging:rxjava2:$paging_version"
+}
