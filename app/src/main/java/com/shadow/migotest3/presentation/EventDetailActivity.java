@@ -44,7 +44,7 @@ public class EventDetailActivity extends AppCompatActivity {
             eventID = event.id();
             order = event.order();
         } else {
-            order = getIntent().getIntExtra(ORDER, 1);
+            order = getIntent().getIntExtra(ORDER, 0);
         }
         findViewById(R.id.btn_save).setOnClickListener(v -> checkAndSave());
         findViewById(R.id.btn_start).setOnClickListener(v -> setStartTime());

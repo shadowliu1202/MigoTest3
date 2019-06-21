@@ -10,7 +10,7 @@ import androidx.room.Query;
 @Dao
 public interface EventDao {
 
-    @Query("SELECT * from EventEntity")
+    @Query("SELECT * from EventEntity ORDER BY `order` ASC")
     DataSource.Factory<Integer, EventEntity> getEvents();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
