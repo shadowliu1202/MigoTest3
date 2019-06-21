@@ -1,27 +1,30 @@
 package com.shadow.migotest3.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.shadow.migotest3.R;
 import com.shadow.migotest3.domain.interactor.SaveEvent;
 import com.shadow.migotest3.domain.model.Event;
 import com.shadow.migotest3.domain.repository.db.DbRepository;
 
+import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneId;
 import org.threeten.bp.format.DateTimeFormatter;
 
-public class EventDetailActivity extends AppCompatActivity {
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
+public class EventDetailActivity extends AppCompatActivity {
     public static final String EVENT = "event";
     private Integer eventID = null;
 
@@ -37,15 +40,40 @@ public class EventDetailActivity extends AppCompatActivity {
             eventID = event.id();
         }
         findViewById(R.id.btn_save).setOnClickListener(v -> checkAndSave());
+        findViewById(R.id.btn_start).setOnClickListener(v -> setStartTime());
+        findViewById(R.id.btn_end).setOnClickListener(v -> setEndTime());
     }
 
+    private void setStartTime() {
+        new SingleDateAndTimePickerDialog.Builder(this)
+                .title("Select Date and Time")
+                .listener(date -> {
+                    LocalDateTime localDateTime = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+                    Button btn_start = findViewById(R.id.btn_start);
+                    btn_start.setText(localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+                }).display();
+    }
+
+    private void setEndTime() {
+        new SingleDateAndTimePickerDialog.Builder(this)
+                .title("Select Date and Time")
+                .listener(date -> {
+                    LocalDateTime localDateTime = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+                    Button btn_end = findViewById(R.id.btn_end);
+                    btn_end.setText(localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+                }).display();
+    }
+
+    @SuppressLint("CheckResult")
     private void checkAndSave() {
         if (checkContentEmpty()) {
             Toast.makeText(this, "Some data are empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        new SaveEvent(createEvent(), new DbRepository(this)).execute().subscribe();
-        finish();
+        new SaveEvent(createEvent(), new DbRepository(this)).execute()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::finish, Throwable::printStackTrace);
+
     }
 
     private Event createEvent() {
