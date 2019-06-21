@@ -24,7 +24,7 @@ public abstract class Event implements Comparable<Event>, Parcelable {
 
         @Override
         public boolean areContentsTheSame(Event oldItem, @NotNull Event newItem) {
-            return oldItem.compareTo(newItem) == 0;
+            return oldItem.toString().equals(newItem.toString());
         }
     };
 
@@ -85,10 +85,16 @@ public abstract class Event implements Comparable<Event>, Parcelable {
 
     @Override
     public int compareTo(@NonNull Event o) {
-        return this.id().compareTo(Objects.requireNonNull(o.id()));
+        return Objects.requireNonNull(this.id()).compareTo(Objects.requireNonNull(o.id()));
     }
 
     public static Builder builder() {
         return new AutoValue_Event.Builder();
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return title() + description() + startDateTime() + endDateTime() + category();
     }
 }

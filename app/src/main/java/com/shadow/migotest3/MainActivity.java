@@ -94,5 +94,8 @@ public class MainActivity extends AppCompatActivity implements EventAdapter.onIt
     @Override
     protected void onResume() {
         super.onResume();
+        if (adapters != null) {
+            adapters.notifyDataSetChanged();
+        }
     }
 }
