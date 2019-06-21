@@ -34,6 +34,7 @@ public class EventAdapter extends PagedListAdapter<Event, EventAdapter.EventView
 
     @Override
     public void onBindViewHolder(@NonNull EventView holder, int position) {
+        holder.bind(getItem(position));
         holder.itemView.setOnClickListener(v -> itemSelect.onSelect(getItem(position)));
     }
 
@@ -49,6 +50,13 @@ public class EventAdapter extends PagedListAdapter<Event, EventAdapter.EventView
             tvStartTime = itemView.findViewById(R.id.tv_start);
             tvEndTime = itemView.findViewById(R.id.tv_end);
             tvCategory = itemView.findViewById(R.id.tv_catagory);
+        }
+
+        void bind(Event item) {
+            tvTitle.setText(item.title());
+            tvStartTime.setText(item.startDateTime().toString());
+            tvEndTime.setText(item.endDateTime().toString());
+            tvCategory.setText(item.category().name());
         }
     }
 }
