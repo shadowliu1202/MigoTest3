@@ -3,6 +3,7 @@ package com.shadow.migotest3.presentation;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,6 +52,33 @@ public class EventDetailActivity extends AppCompatActivity {
         findViewById(R.id.btn_end).setOnClickListener(v -> setEndTime());
         findViewById(R.id.btn_delete).setOnClickListener(v -> deleteEvent());
         findViewById(R.id.btn_delete).setVisibility(eventID == null ? View.INVISIBLE : View.VISIBLE);
+
+        addSwipeDetect();
+    }
+
+    private void addSwipeDetect() {
+        findViewById(R.id.layout_content).setOnTouchListener(new View.OnTouchListener() {
+            float x1, x2;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = event.getX();
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        x2 = event.getX();
+                        if (x1 > x2) {
+                            finish();
+                        } else if (x2 > x1) {
+                            finish();
+                        }
+                        return true;
+                }
+
+                return false;
+            }
+        });
     }
 
     @SuppressLint("CheckResult")
