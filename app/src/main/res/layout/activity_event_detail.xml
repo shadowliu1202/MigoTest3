@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="開始時間" />
+            android:text="START" />
 
         <TextView
             android:id="@+id/textView2"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="結束時間" />
+            android:text="END" />
     </LinearLayout>
 
     <EditText
@@ -59,10 +59,10 @@
         android:layout_height="200dp"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="Desccription"
         android:inputType="textPersonName"
         android:maxLength="1000"
         android:scrollbars="vertical"
-        android:text="內容"
         android:textAlignment="viewStart" />
 
     <Button
