@@ -1,6 +1,5 @@
 package com.shadow.migotest3.domain.model;
 
-import android.content.Intent;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
@@ -11,6 +10,8 @@ import com.google.auto.value.AutoValue;
 
 import org.jetbrains.annotations.NotNull;
 import org.threeten.bp.LocalDateTime;
+
+import java.util.Objects;
 
 @AutoValue
 public abstract class Event implements Comparable<Event>, Parcelable {
@@ -59,7 +60,15 @@ public abstract class Event implements Comparable<Event>, Parcelable {
 
         abstract Builder title(String title);
 
-        public abstract Builder description(String description);
+        public Builder addDescription(String title) {
+            if (title.length() > 1000) {
+                throw new StringIndexOutOfBoundsException();
+            }
+            description(title);
+            return this;
+        }
+
+        abstract Builder description(String description);
 
         public abstract Builder startDateTime(LocalDateTime startDateTime);
 
@@ -76,7 +85,7 @@ public abstract class Event implements Comparable<Event>, Parcelable {
 
     @Override
     public int compareTo(@NonNull Event o) {
-        return this.id().compareTo(o.id());
+        return this.id().compareTo(Objects.requireNonNull(o.id()));
     }
 
     public static Builder builder() {

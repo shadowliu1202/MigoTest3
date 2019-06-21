@@ -128,7 +128,7 @@ public class EventDetailActivity extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.sp_category);
         return Event.builder().addTitle(et_title.getText().toString())
                 .id(eventID)
-                .description(et_description.getText().toString())
+                .addDescription(et_description.getText().toString())
                 .startDateTime(LocalDateTime.parse(btn_start.getText(), DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .endDateTime(LocalDateTime.parse(btn_end.getText(), DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .category(Event.Category.values()[spinner.getSelectedItemPosition()])

@@ -14,7 +14,7 @@ public class ReorderEvent {
         this.eventRepository = eventRepository;
         this.event = Event.builder()
                 .addTitle(event.title())
-                .description(event.description())
+                .addDescription(event.description())
                 .id(event.id())
                 .startDateTime(event.startDateTime())
                 .endDateTime(event.endDateTime())
