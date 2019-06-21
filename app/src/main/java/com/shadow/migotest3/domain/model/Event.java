@@ -49,7 +49,15 @@ public abstract class Event implements Comparable<Event>, Parcelable {
     @AutoValue.Builder
     public abstract static class Builder {
 
-        public abstract Builder title(String title);
+        public Builder addTitle(String title) {
+            if (title.length() > 50) {
+                throw new StringIndexOutOfBoundsException();
+            }
+            title(title);
+            return this;
+        }
+
+        abstract Builder title(String title);
 
         public abstract Builder description(String description);
 

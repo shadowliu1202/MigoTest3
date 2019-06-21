@@ -51,7 +51,7 @@ public class DbRepository implements EventRepository {
 
     private Event toEvents(EventEntity eventEntity) {
         return Event.builder().id(eventEntity.id)
-                .title(eventEntity.title)
+                .addTitle(eventEntity.title)
                 .description(eventEntity.description)
                 .category(Event.Category.valueOf(eventEntity.category))
                 .startDateTime(LocalDateTime.parse(eventEntity.startDate))

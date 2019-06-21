@@ -13,7 +13,7 @@ public class ReorderEvent {
     public ReorderEvent(Event event, int toPos, EventRepository eventRepository) {
         this.eventRepository = eventRepository;
         this.event = Event.builder()
-                .title(event.title())
+                .addTitle(event.title())
                 .description(event.description())
                 .id(event.id())
                 .startDateTime(event.startDateTime())
