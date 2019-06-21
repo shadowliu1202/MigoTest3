@@ -3,6 +3,9 @@ package com.shadow.migotest3.domain.interactor;
 import com.shadow.migotest3.domain.model.Event;
 import com.shadow.migotest3.domain.repository.EventRepository;
 
+import io.reactivex.Completable;
+import io.reactivex.schedulers.Schedulers;
+
 public class SaveEvent {
     private final Event event;
     private final EventRepository eventRepository;
@@ -13,7 +16,7 @@ public class SaveEvent {
         this.eventRepository = eventRepository;
     }
 
-    public void execute() {
-
+    public Completable execute() {
+        return eventRepository.setEvents(event).subscribeOn(Schedulers.io());
     }
 }

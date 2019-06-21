@@ -44,7 +44,7 @@ public class EventDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Some data are empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        new SaveEvent(createEvent(), new DbRepository(this)).execute();
+        new SaveEvent(createEvent(), new DbRepository(this)).execute().subscribe();
         finish();
     }
 

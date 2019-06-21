@@ -12,7 +12,6 @@ import com.shadow.migotest3.domain.repository.EventRepository;
 import org.threeten.bp.LocalDateTime;
 
 import io.reactivex.Completable;
-import io.reactivex.schedulers.Schedulers;
 
 public class DbRepository implements EventRepository {
 
@@ -21,14 +20,6 @@ public class DbRepository implements EventRepository {
     public DbRepository(Context context) {
         EventDatabase database = EventDatabase.getDatabase(context);
         eventDao = database.eventDao();
-        Completable.fromAction(() -> eventDao.setEvent(createFakeEvent())).subscribeOn(Schedulers.io()).subscribe();
-    }
-
-    private EventEntity createFakeEvent() {
-        EventEntity eventEntity = new EventEntity();
-        eventEntity.title = "test";
-        eventEntity.description = "test";
-        return eventEntity;
     }
 
     @Override
