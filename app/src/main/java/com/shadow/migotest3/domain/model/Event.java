@@ -1,8 +1,8 @@
-package com.shadow.migotest3.model;
+package com.shadow.migotest3.domain.model;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 
 import com.google.auto.value.AutoValue;
 
