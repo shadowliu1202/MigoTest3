@@ -3,6 +3,7 @@ package com.shadow.migotest3.presentation;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.shadow.migotest3.R;
+import com.shadow.migotest3.domain.interactor.DeleteEvent;
 import com.shadow.migotest3.domain.interactor.SaveEvent;
 import com.shadow.migotest3.domain.model.Event;
 import com.shadow.migotest3.domain.repository.db.DbRepository;
@@ -42,6 +44,15 @@ public class EventDetailActivity extends AppCompatActivity {
         findViewById(R.id.btn_save).setOnClickListener(v -> checkAndSave());
         findViewById(R.id.btn_start).setOnClickListener(v -> setStartTime());
         findViewById(R.id.btn_end).setOnClickListener(v -> setEndTime());
+        findViewById(R.id.btn_delete).setOnClickListener(v -> deleteEvent());
+        findViewById(R.id.btn_delete).setVisibility(eventID == null ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    @SuppressLint("CheckResult")
+    private void deleteEvent() {
+        new DeleteEvent(createEvent(), new DbRepository(this)).execute()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::finish, Throwable::printStackTrace);
     }
 
     private void setStartTime() {

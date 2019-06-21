@@ -10,4 +10,6 @@ import io.reactivex.Completable;
 public interface EventRepository {
     LiveData<PagedList<Event>> getEvents();
     Completable setEvents(Event event);
+    Completable deleteEvents(Event event);
+
 }

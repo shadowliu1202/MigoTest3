@@ -32,6 +32,11 @@ public class DbRepository implements EventRepository {
         return Completable.fromAction(() -> eventDao.setEvent(toEventsEntity(event)));
     }
 
+    @Override
+    public Completable deleteEvents(Event event) {
+        return Completable.fromAction(() -> eventDao.deleteEvent(toEventsEntity(event)));
+    }
+
     private EventEntity toEventsEntity(Event event) {
         EventEntity entity = new EventEntity();
         entity.id = event.id();
