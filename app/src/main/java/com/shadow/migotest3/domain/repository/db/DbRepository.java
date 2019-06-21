@@ -45,6 +45,7 @@ public class DbRepository implements EventRepository {
         entity.startDate = event.startDateTime().toString();
         entity.endDate = event.endDateTime().toString();
         entity.category = event.category().name();
+        entity.order = event.order();
         return entity;
     }
 
@@ -55,6 +56,7 @@ public class DbRepository implements EventRepository {
                 .category(Event.Category.valueOf(eventEntity.category))
                 .startDateTime(LocalDateTime.parse(eventEntity.startDate))
                 .endDateTime(LocalDateTime.parse(eventEntity.endDate))
+                .order(eventEntity.order)
                 .build();
     }
 }

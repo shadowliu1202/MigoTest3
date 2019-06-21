@@ -28,7 +28,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class EventDetailActivity extends AppCompatActivity {
     public static final String EVENT = "event";
+    public static final String ORDER = "order";
     private Integer eventID = null;
+    private int order = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,9 @@ public class EventDetailActivity extends AppCompatActivity {
         if (event != null) {
             initUI(event);
             eventID = event.id();
+            order = event.order();
+        } else {
+            order = getIntent().getIntExtra(ORDER, 1);
         }
         findViewById(R.id.btn_save).setOnClickListener(v -> checkAndSave());
         findViewById(R.id.btn_start).setOnClickListener(v -> setStartTime());
@@ -99,6 +104,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 .startDateTime(LocalDateTime.parse(btn_start.getText(), DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .endDateTime(LocalDateTime.parse(btn_end.getText(), DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                 .category(Event.Category.values()[spinner.getSelectedItemPosition()])
+                .order(order)
                 .build();
     }
 

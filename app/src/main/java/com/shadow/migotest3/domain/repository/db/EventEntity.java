@@ -22,4 +22,5 @@ public class EventEntity {
     public String endDate = LocalDateTime.now().toString();
     @NonNull
     public String category = Event.Category.Others.name();
+    public int order = 0;
 }

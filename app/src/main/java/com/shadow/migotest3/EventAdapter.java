@@ -3,6 +3,7 @@ package com.shadow.migotest3;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,7 @@ public class EventAdapter extends PagedListAdapter<Event, EventAdapter.EventView
     @Override
     public void onBindViewHolder(@NonNull EventView holder, int position) {
         holder.bind(getItem(position));
-        holder.itemView.setOnClickListener(v -> itemSelect.onSelect(getItem(position)));
+        holder.ivEdit.setOnClickListener(v -> itemSelect.onSelect(getItem(position)));
     }
 
     class EventView extends RecyclerView.ViewHolder {
@@ -43,6 +44,7 @@ public class EventAdapter extends PagedListAdapter<Event, EventAdapter.EventView
         final TextView tvStartTime;
         final TextView tvEndTime;
         final TextView tvCategory;
+        final ImageView ivEdit;
 
         EventView(View itemView) {
             super(itemView);
@@ -50,6 +52,7 @@ public class EventAdapter extends PagedListAdapter<Event, EventAdapter.EventView
             tvStartTime = itemView.findViewById(R.id.tv_start);
             tvEndTime = itemView.findViewById(R.id.tv_end);
             tvCategory = itemView.findViewById(R.id.tv_catagory);
+            ivEdit = itemView.findViewById(R.id.iv_edit);
         }
 
         void bind(Event item) {

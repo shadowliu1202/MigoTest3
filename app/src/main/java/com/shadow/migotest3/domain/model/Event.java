@@ -44,6 +44,8 @@ public abstract class Event implements Comparable<Event>, Parcelable {
 
     public abstract Category category();
 
+    public abstract int order();
+
     @AutoValue.Builder
     public abstract static class Builder {
 
@@ -58,6 +60,8 @@ public abstract class Event implements Comparable<Event>, Parcelable {
         public abstract Builder id(Integer id);
 
         public abstract Builder category(Category category);
+
+        public abstract Builder order(int order);
 
         public abstract Event build();
     }
