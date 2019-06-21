@@ -36,6 +36,22 @@ public class DbRepository implements EventRepository {
         return new LivePagedListBuilder<>(eventDao.getEvents().map(this::toEvents), 20).build();
     }
 
+    @Override
+    public Completable setEvents(Event event) {
+        return Completable.fromAction(() -> eventDao.setEvent(toEventsEntity(event)));
+    }
+
+    private EventEntity toEventsEntity(Event event) {
+        EventEntity entity = new EventEntity();
+        entity.id = event.id();
+        entity.title = event.title();
+        entity.description = event.description();
+        entity.startDate = event.startDateTime().toString();
+        entity.endDate = event.endDateTime().toString();
+        entity.category = event.category().name();
+        return entity;
+    }
+
     private Event toEvents(EventEntity eventEntity) {
         return Event.builder().id(eventEntity.id)
                 .title(eventEntity.title)

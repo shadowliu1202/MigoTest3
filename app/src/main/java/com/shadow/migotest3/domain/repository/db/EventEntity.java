@@ -11,7 +11,7 @@ import org.threeten.bp.LocalDateTime;
 @Entity
 public class EventEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id = -1;
+    public Integer id;
     @NonNull
     public String title = "";
     @NonNull

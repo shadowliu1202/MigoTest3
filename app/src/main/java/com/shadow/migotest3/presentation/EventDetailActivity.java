@@ -23,7 +23,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 public class EventDetailActivity extends AppCompatActivity {
 
     public static final String EVENT = "event";
-    private int eventID = -1;
+    private Integer eventID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

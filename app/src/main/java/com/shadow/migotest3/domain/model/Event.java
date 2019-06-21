@@ -1,7 +1,10 @@
 package com.shadow.migotest3.domain.model;
 
+import android.content.Intent;
 import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.google.auto.value.AutoValue;
@@ -28,7 +31,8 @@ public abstract class Event implements Comparable<Event>, Parcelable {
         Personal, Business, Others
     }
 
-    public abstract int id();
+    @Nullable
+    public abstract Integer id();
 
     public abstract String title();
 
@@ -51,7 +55,7 @@ public abstract class Event implements Comparable<Event>, Parcelable {
 
         public abstract Builder endDateTime(LocalDateTime endDateTime);
 
-        public abstract Builder id(int id);
+        public abstract Builder id(Integer id);
 
         public abstract Builder category(Category category);
 
@@ -60,7 +64,7 @@ public abstract class Event implements Comparable<Event>, Parcelable {
 
     @Override
     public int compareTo(@NonNull Event o) {
-        return this.id() - o.id();
+        return this.id().compareTo(o.id());
     }
 
     public static Builder builder() {
