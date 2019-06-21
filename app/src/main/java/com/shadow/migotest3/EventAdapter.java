@@ -3,7 +3,6 @@ package com.shadow.migotest3;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,14 +41,14 @@ public class EventAdapter extends PagedListAdapter<Event, EventAdapter.EventView
         final TextView tvTitle;
         final TextView tvStartTime;
         final TextView tvEndTime;
-        final TextView tvCatagory;
+        final TextView tvCategory;
 
         EventView(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvStartTime = itemView.findViewById(R.id.tv_start);
             tvEndTime = itemView.findViewById(R.id.tv_end);
-            tvCatagory = itemView.findViewById(R.id.tv_catagory);
+            tvCategory = itemView.findViewById(R.id.tv_catagory);
         }
     }
 }
